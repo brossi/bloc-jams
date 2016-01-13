@@ -52,10 +52,12 @@ body {
 
 .song-time-title {
     width: 85%;
+    padding-right: 20px;
 }
 
 .song-item-duration {
     width: 5%;
+    text-align: right;
 }
 
 @media (max-width: 40rem) and (min-width: 20rem) {
