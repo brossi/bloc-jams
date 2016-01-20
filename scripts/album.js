@@ -59,8 +59,34 @@ var createSongRow = function createSongRow(songNumber, songName, songLength) {
      }
  };
 
+var findParentByClassName = function findParentByClassName(element, targetClass) {
+  // check to see if the element being evaluated has a parent element
+  var parent = element.parentElement;
+  
+  if (!parent) {
+    alert('No parent found');
+    return;
+  }
+  // traverse up the element's node until an element with the target class is found, if it exists
+  
+  while ( parent.className && parent.className != targetClass) {
+    parent = parent.parentElement;
+  }
+  // when the while statement is exhausted, confirm that the element with the targetted class was found
+  if (parent.className === targetClass) {
+    return parent;
+  }
+  // otherwise, a parent element was not found with the targetted class
+  else {
+    alert('No parent found with that class name');
+    return;
+  }
+};
+
 var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
 var songRows = document.getElementsByClassName('album-view-song-item');
+
+var bodyTest = document.getElementsByTagName('body');
 
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
  
