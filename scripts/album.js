@@ -1,3 +1,14 @@
+var setSong = function setSong(songNumber) {
+  
+  currentlyPlayingSongNumber = parseInt(songNumber);
+  currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
+};
+
+var getSongNumberTD = function getSongNumberTD(number) {
+  
+  return $('.song-item-number[data-song-number="' + number + '"]');
+};
+
 var createSongRow = function createSongRow(songNumber, songName, songLength) {
     var template = 
           '<tr class="album-view-song-item">'
@@ -13,14 +24,13 @@ var createSongRow = function createSongRow(songNumber, songName, songLength) {
       var songNumber = parseInt($(this).attr('data-song-number'));
 
       if (currentlyPlayingSongNumber !== null) {
-          var currentlyPlayingTD = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
+          var currentlyPlayingTD = getSongNumberTD(currentlyPlayingSongNumber);
           currentlyPlayingTD.html(currentlyPlayingSongNumber);
       }
       
       if (currentlyPlayingSongNumber !== songNumber) {
           $(this).html(pauseButtonTemplate);
-          currentlyPlayingSongNumber = songNumber;
-          currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
+          setSong(songNumber);
           updatePlayerBarSong();
       } else if (currentlyPlayingSongNumber === songNumber) {
           $(this).html(playButtonTemplate);
@@ -98,12 +108,12 @@ var nextSong = function nextSong() {
   updatePlayerBarSong();
   
   // update html of previous song's element with number
-  var prevPlayingTD = $('.song-item-number[data-song-number="' + prevSongNumber + '"]');
+  var prevPlayingTD = getSongNumberTD(prevSongNumber);
   var prevSongNumber = prevPlayingTD.attr('data-song-number');
   prevPlayingTD.html(prevSongNumber);
   
   // update html of new song's element with pause button
-  var currentSongTD = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
+  var currentSongTD = getSongNumberTD(currentlyPlayingSongNumber);
   currentSongTD.html(pauseButtonTemplate);
 };
 
@@ -129,12 +139,12 @@ var previousSong = function previousSong() {
   updatePlayerBarSong();
   
   // update html of previous song's element with number
-  var prevPlayingTD = $('.song-item-number[data-song-number="' + prevSongNumber + '"]');
+  var prevPlayingTD = getSongNumberTD(prevSongNumber);
   var prevSongNumber = prevPlayingTD.attr('data-song-number');
   prevPlayingTD.html(prevSongNumber);
   
   // update html of new song's element with pause button
-  var currentSongTD = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
+  var currentSongTD = getSongNumberTD(currentlyPlayingSongNumber);
   currentSongTD.html(pauseButtonTemplate);
 };
 
